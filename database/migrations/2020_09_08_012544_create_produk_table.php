@@ -20,6 +20,7 @@ class CreateProdukTable extends Migration
             $table->bigInteger('id_status')->unsigned();
             $table->integer('stok');
             $table->string('nama_produk');
+            $table->string('gambar_produk');
             $table->integer('harga');
             $table->timestamps();
 
