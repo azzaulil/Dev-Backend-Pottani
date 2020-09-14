@@ -17,7 +17,7 @@ class CreateKomentarTable extends Migration
             $table->id('id_komentar');
             $table->bigInteger('id_users')->unsigned();
             $table->bigInteger('id_post')->unsigned();
-            $table->integer('parent_id');
+            $table->integer('parent_id')->nullable();
             $table->text('komentar');
             $table->timestamps();
 

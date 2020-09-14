@@ -17,6 +17,7 @@ class CreatePostTable extends Migration
             $table->id('id_post');
             $table->bigInteger('id_users')->unsigned();
             $table->bigInteger('id_jenis_post')->unsigned();
+            $table->string('judul');
             $table->text('artikel');
             $table->string('gambar');
             $table->timestamps();

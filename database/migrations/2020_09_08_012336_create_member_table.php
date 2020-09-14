@@ -20,6 +20,7 @@ class CreateMemberTable extends Migration
             $table->string('alamat');
             $table->string('usia');
             $table->string('telepon');
+            $table->string('foto_profil')->nullable();
             $table->enum('jenis_kelamin',['L','P']);
             $table->timestamps();
 
