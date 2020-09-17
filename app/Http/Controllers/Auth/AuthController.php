@@ -93,7 +93,7 @@ class AuthController extends Controller
                         'token' => $tokenResult->accessToken,
                         'id_role' =>array_values($users)[0]['id_role'],
                         'username' => array_values($users)[0]['username'],
-                        'foto_profil'=>array_values($members)[0]['image_URL'],
+                        // 'foto_profil'=>array_values($members)[0]['image_URL'],
                     ]);
                 
                 }else if($user->id_role == 1){
