@@ -87,7 +87,7 @@ class AuthController extends Controller
                     $member = Member::where('id_users', '=', $user->id_users )->get();
                     $user = User::where('id_users', '=', $user->id_users )->get();
                     $users =$user->toArray();
-                    $members=$members->toArray();
+                    $members=$member->toArray();
                     return response()->json([
                         'status' => 'Success',
                         'token' => $tokenResult->accessToken,
