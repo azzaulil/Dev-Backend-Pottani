@@ -84,8 +84,8 @@ class AuthController extends Controller
                 $token->save();
                 
                 if($user->id_role == 2){
-                    $member = Member::where('id_user', '=', $user->id_user )->get();
-                    $user = User::where('id_user', '=', $user->id_user )->get();
+                    $member = Member::where('id_user', '=', $user->id_users )->get();
+                    $user = User::where('id_user', '=', $user->id_users )->get();
                     $users =$user->toArray();
                     $members=$members->toArray();
                     return response()->json([
