@@ -16,6 +16,15 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    protected $table = 'users';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $primaryKey = 'id_users';
+
     protected $fillable = [
         'name', 'email', 'password','username','is_active','id_role'
     ];
@@ -39,15 +48,15 @@ class User extends Authenticatable
     ];
 
     public function ads(){
-        return $this->hasMany(Ads::class,'id_user');
+        return $this->hasMany(Ads::class,'id_users');
     }  
 
     public function member(){
-        return $this->hasOne(Member::class, 'id_user');
+        return $this->hasOne(Member::class, 'id_users');
     }
 
     public function komentar(){
-        return $this->hasMany(Komentar::class, 'id_user');
+        return $this->hasMany(Komentar::class, 'id_users');
     }
 
     public function post(){

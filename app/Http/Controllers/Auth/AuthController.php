@@ -17,15 +17,14 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
-            'username' => 'required|string|unique:users'
         ]);
         DB::beginTransaction();
         try{
             $users = new User;
             $users->email = $request->email;
-            $users->username = $request->username;
             $users->password = bcrypt($request->password);
             $users->id_role=2;
+            $users->username=$request->username;
             $users->save();
             
         }catch(\Exception $e){
@@ -34,12 +33,13 @@ class AuthController extends Controller
         }
         try{
             $member = new Member;
-            $member->id_users = $users->id;
+            $member->id_users = 2;
             $member->nama_lengkap = $request->nama_lengkap;
-            $member->alamat = $request->alamat;
-            $member->jenis_kelamin = $request->jenis_kelamin;
             $member->usia = $request->usia;
+            $member->alamat = $request->alamat;
             $member->telepon = $request->telepon;
+            $member->jenis_kelamin = $request->jenis_kelamin;
+            
             if($request->hasfile('foto_profil')){
                 $file = $request->file('foto_profil');
                 $extension = $file->getClientOriginalExtension();

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call('PostSeeder');
         $this->call('KomentarSeeder');
         $this->call('MemberSeeder');
+        $this->call('KelasSeeder');
         $this->call('JenisProdukSeeder');
         $this->call('StatusSeeder');
         $this->call('ProdukSeeder');

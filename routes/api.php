@@ -20,7 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['auth:api']], function() { 
     Route::group(['middleware' => 'admin','prefix' => 'admin'], function() { 
-
+        Route::get('/all-data-member', 'User\AdminController@getMember');
+        Route::get('/create-class', 'User\AdminController@createClass');
+        Route::post('/update-class/{id}', 'User\AdminController@updateClass');
+        Route::delete('/delete-class/{id}', 'User\AdminController@deleteClass');
+        Route::get('/show-class', 'User\AdminController@showClass');
     });
 
     Route::group(['middleware' => ['member','active_user'],'prefix' => 'member'], function() { 
