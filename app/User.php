@@ -48,6 +48,7 @@ class User extends Authenticatable
     ];
 
     public function ads(){
+<<<<<<< HEAD
         return $this->hasMany(Ads::class,'id_users');
     }  
 
@@ -57,6 +58,17 @@ class User extends Authenticatable
 
     public function komentar(){
         return $this->hasMany(Komentar::class, 'id_users');
+=======
+        return $this->hasMany(Ads::class,'id_user');
+    }  
+
+    public function member(){
+        return $this->hasOne(Member::class, 'id_user');
+    }
+
+    public function komentar(){
+        return $this->hasMany(Komentar::class, 'id_user');
+>>>>>>> 56e65f3... add model
     }
 
     public function post(){
