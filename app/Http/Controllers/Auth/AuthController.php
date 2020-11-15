@@ -24,7 +24,6 @@ class AuthController extends Controller
             $users->email = $request->email;
             $users->password = bcrypt($request->password);
             $users->id_role=2;
-            $users->username=$request->username;
             $users->save();
             
         }catch(\Exception $e){
@@ -33,7 +32,7 @@ class AuthController extends Controller
         }
         try{
             $member = new Member;
-            $member->id_users = 2;
+            $member->id_users = $users->id;
             $member->nama_lengkap = $request->nama_lengkap;
             $member->usia = $request->usia;
             $member->alamat = $request->alamat;
@@ -92,7 +91,7 @@ class AuthController extends Controller
                         'status' => 'Success',
                         'token' => $tokenResult->accessToken,
                         'id_role' =>array_values($users)[0]['id_role'],
-                        'username' => array_values($users)[0]['username'],
+                        'email' => array_values($users)[0]['email'],
                         // 'foto_profil'=>array_values($members)[0]['image_URL'],
                     ]);
                 
@@ -101,7 +100,7 @@ class AuthController extends Controller
                         'status' => 'Success',
                         'id_role' => 1,
                         'token' => $tokenResult->accessToken,
-                        'username' => 'Admin'
+                        'role' => 'admin'
                     ]);
                 }
            }else if(Auth::user()->is_active == 0){

@@ -26,7 +26,7 @@ class User extends Authenticatable
     protected $primaryKey = 'id_users';
 
     protected $fillable = [
-        'name', 'email', 'password','username','is_active','id_role'
+        'name', 'email', 'password','is_active','id_role'
     ];
 
     /**
@@ -48,17 +48,7 @@ class User extends Authenticatable
     ];
 
     public function ads(){
-<<<<<<< HEAD
-        return $this->hasMany(Ads::class,'id_users');
-    }  
 
-    public function member(){
-        return $this->hasOne(Member::class, 'id_users');
-    }
-
-    public function komentar(){
-        return $this->hasMany(Komentar::class, 'id_users');
-=======
         return $this->hasMany(Ads::class,'id_user');
     }  
 
@@ -68,7 +58,6 @@ class User extends Authenticatable
 
     public function komentar(){
         return $this->hasMany(Komentar::class, 'id_user');
->>>>>>> 56e65f3... add model
     }
 
     public function post(){
