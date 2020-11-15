@@ -17,13 +17,11 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
-            'username' => 'required|string|unique:users'
         ]);
         DB::beginTransaction();
         try{
             $users = new User;
             $users->email = $request->email;
-            $users->username = $request->username;
             $users->password = bcrypt($request->password);
             $users->id_role=2;
             $users->save();
@@ -92,7 +90,7 @@ class AuthController extends Controller
                         'status' => 'Success',
                         'token' => $tokenResult->accessToken,
                         'id_role' =>array_values($users)[0]['id_role'],
-                        'username' => array_values($users)[0]['username'],
+                        'email' => array_values($users)[0]['email'],
                         // 'foto_profil'=>array_values($members)[0]['image_URL'],
                     ]);
                 
@@ -101,7 +99,7 @@ class AuthController extends Controller
                         'status' => 'Success',
                         'id_role' => 1,
                         'token' => $tokenResult->accessToken,
-                        'username' => 'Admin'
+                        'role' => 'Admin'
                     ]);
                 }
            }else if(Auth::user()->is_active == 0){
