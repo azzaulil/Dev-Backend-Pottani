@@ -32,7 +32,7 @@ class AuthController extends Controller
         }
         try{
             $member = new Member;
-            $member->id_users = 3;
+            $member->id_users = $users->id_users;
             $member->nama_lengkap = $request->nama_lengkap;
             $member->alamat = $request->alamat;
             $member->jenis_kelamin = $request->jenis_kelamin;
