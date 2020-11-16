@@ -90,7 +90,7 @@ class AuthController extends Controller
                         'status' => 'Success',
                         'token' => $tokenResult->accessToken,
                         'id_role' =>array_values($users)[0]['id_role'],
-                        'email' => array_values($users)[0]['email'],
+                        'nama_lengkap' => array_values($members)[0]['nama_lengkap'],
                         // 'foto_profil'=>array_values($members)[0]['image_URL'],
                     ]);
                 
@@ -99,7 +99,7 @@ class AuthController extends Controller
                         'status' => 'Success',
                         'id_role' => 1,
                         'token' => $tokenResult->accessToken,
-                        'role' => 'Admin'
+                        'role_name' => 'Admin'
                     ]);
                 }
            }else if(Auth::user()->is_active == 0){
