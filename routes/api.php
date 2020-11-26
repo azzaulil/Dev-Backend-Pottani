@@ -28,7 +28,8 @@ Route::group(['middleware' => ['auth:api']], function() {
     });
 
     Route::group(['middleware' => ['member','active_user'],'prefix' => 'member'], function() { 
-
+        Route::post('/register-class', 'User\MemberController@registerClass');
+        Route::get('/show-registered-class', 'User\MemberController@showClassRegister');
     });
 
 });

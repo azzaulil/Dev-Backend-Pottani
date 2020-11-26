@@ -13,16 +13,15 @@ class KelasSeeder extends Seeder
     public function run()
     {
         $data = [
-            [1,'Kelas Hidroponik','20200824_123156.jpg','Kelas ini mengajarkan tentang hidroponik','https://www.youtube.com/','150000'],//1
+            ['Kelas Hidroponik','20200824_123156.jpg','Kelas ini mengajarkan tentang hidroponik','https://www.youtube.com/','150000'],//1
             ];
 
         for ($i=0; $i < count($data); $i++) {
-        	$id = $data[$i][0];
-            $nama = $data[$i][1];
-            $poster = $data[$i][2];
-            $deskripsi = $data[$i][3];
-            $link_video = $data[$i][4];
-            $biaya = $data[$i][5];
+            $nama = $data[$i][0];
+            $poster = $data[$i][1];
+            $deskripsi = $data[$i][2];
+            $link_video = $data[$i][3];
+            $biaya = $data[$i][4];
             $created_at = Carbon::now();
             $updated_at = Carbon::now();
 

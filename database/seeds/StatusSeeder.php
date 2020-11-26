@@ -16,6 +16,8 @@ class StatusSeeder extends Seeder
             ['Diajukan'],//1
             ['Ditinjau'],//2
             ['Disetujui'],//3
+            ['Aktif'],//4
+            ['Terdaftar'],//5
         ];
 
         for ($i=0; $i < count($data); $i++) {
