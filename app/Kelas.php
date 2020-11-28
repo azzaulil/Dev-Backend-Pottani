@@ -12,10 +12,10 @@ class Kelas extends Model
      *
      * @var array
      */
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_class';
 
     protected $fillable = [
-        'nama','poster','deskripsi','link_video','biaya'
+        'nama','poster','deskripsi','link_video','biaya', 'id_status'
     ];
 
     /**
@@ -25,7 +25,8 @@ class Kelas extends Model
      */
     protected $hidden = [];
 
-    public function member(){
-        return $this->belongsTo(Member::class,'id_member');
+    public function status(){
+        return $this->belongsTo(Status::class,'id_status');
     }
+
 }

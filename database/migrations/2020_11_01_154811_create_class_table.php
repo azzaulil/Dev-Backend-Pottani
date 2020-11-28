@@ -16,10 +16,11 @@ class CreateClassTable extends Migration
         Schema::create('class', function (Blueprint $table) {
             $table->id('id_class');
             $table->string('nama');
-            $table->string('poster');
+            $table->string('poster')->nullable();
             $table->string('deskripsi');
             $table->string('link_video');
             $table->integer('biaya');
+            $table->bigInteger('id_status')->unsigned();
             $table->timestamps();
         });
     }

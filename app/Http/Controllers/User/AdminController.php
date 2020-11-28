@@ -29,7 +29,7 @@ class AdminController extends Controller
     public function createClass(Request $request){
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string',
-            'poster' => 'required|image|mimes:jpeg,png,jpg|max:2000',
+            'poster' => 'image|mimes:jpeg,png,jpg|max:2000',
             'deskripsi' => 'required|string',
             'link_video' => 'required|string',
             'biaya' => 'required|int',
@@ -43,7 +43,8 @@ class AdminController extends Controller
             $class->nama =  $request->nama;
             $class->deskripsi =  $request->deskripsi;
             $class->link_video =  $request->link_video;
-            $class->biaya=  $request->biaya;
+            $class->biaya =  $request->biaya;
+            $class->id_status =  6;
             
             if($request->hasfile('poster')){
                 $file = $request->file('poster');

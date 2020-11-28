@@ -28,8 +28,11 @@ Route::group(['middleware' => ['auth:api']], function() {
     });
 
     Route::group(['middleware' => ['member','active_user'],'prefix' => 'member'], function() { 
+        Route::get('/show-all-class', 'User\MemberController@showAllClass');
         Route::post('/register-class', 'User\MemberController@registerClass');
         Route::get('/show-registered-class', 'User\MemberController@showClassRegister');
+        Route::get('/show-profile', 'User\MemberController@showProfile');
+        Route::post('/update-profile/{id_member}', 'User\MemberController@updateProfile');
     });
 
 });
