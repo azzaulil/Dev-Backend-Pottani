@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Notifications\Notifiable;
 
-
 class AdminController extends Controller
 {
     public function getMember(){
@@ -44,7 +43,7 @@ class AdminController extends Controller
             $class->deskripsi =  $request->deskripsi;
             $class->link_video =  $request->link_video;
             $class->biaya =  $request->biaya;
-            $class->id_status =  6;
+            $class->id_status =  4;
             
             if($request->hasfile('poster')){
                 $file = $request->file('poster');

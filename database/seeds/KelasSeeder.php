@@ -13,7 +13,8 @@ class KelasSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['Kelas Hidroponik','20200824_123156.jpg','Kelas ini mengajarkan tentang hidroponik','https://www.youtube.com/','150000',4],//1
+            ['Kelas Hidroponik : Dari Hobi Jadi Bisnis Masa Kini','IMG-20201202-WA0000.jpg','Sebuah kelas yang menghadirkan praktisi hidroponik untuk berbagi pengetahuan dan pengalaman selama menekuni hidroponik','-','0',4],//1
+            ['Kelas Microgreens 101 : Get to Know More about Microgreens','IMG-20201202-WA0001.jpg','Sebuah kelas yang menghadirkan praktisi microgreens untuk berbagi pengetahuan dan pengalaman selama menekuni microgreens','-','0',4],//2
             ];
 
         for ($i=0; $i < count($data); $i++) {

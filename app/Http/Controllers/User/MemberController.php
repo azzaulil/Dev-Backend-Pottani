@@ -157,7 +157,7 @@ class MemberController extends Controller
         }
         $member->save();
         $users->update($request->all());
-        return response()->json([$member], 200);
+        return response()->json($member, 200);
     }
 
 }

@@ -14,7 +14,7 @@ class UsersSeeder extends Seeder
     {
         $data = [
             [1,1, 'admin@gmail.com', bcrypt('12345678')],//1
-            [2,1, 'member@gmail.com', bcrypt('12345678')],//1
+            [2,1, 'member@gmail.com', bcrypt('12345678')],//2
         ];
 
         for ($i=0; $i < count($data); $i++) {
