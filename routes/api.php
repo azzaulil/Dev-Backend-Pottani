@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     });
 
     Route::group(['middleware' => ['member','active_user'],'prefix' => 'member'], function() { 
-        Route::get('/show-all-class', 'User\MemberController@showAllClass');
+        
         Route::post('/register-class', 'User\MemberController@registerClass');
         Route::get('/show-registered-class', 'User\MemberController@showClassRegister');
         Route::get('/show-profile', 'User\MemberController@showProfile');
@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth:api']], function() {
 Route::group([ 'prefix' => 'auth'], function () {
     Route::post('login', 'Auth\AuthController@login');
     Route::post('register', 'Auth\AuthController@register');
+    Route::get('show-all-class', 'User\MemberController@showAllClass');
     
     Route::group([ 'middleware' => 'auth:api'], function() {
         Route::post('logout', 'Auth\AuthController@logout');
