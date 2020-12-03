@@ -6,22 +6,29 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Member;
+use App\Kelas;
+use File;
+use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Notifications\Notifiable;
 
 class AdminController extends Controller
 {
     public function getMember(){
-    	$member = User::with('member')->where('id_role',2)->get();
+        $member = User::with('member')->where('id_role',2)->get();
 
-    	return response()->json([
+        return response()->json([
             'message' => 'Success',
             'totalData' => sizeof($member),
             'members' => $member->toArray()
         ], 200);
     }
+
     public function createClass(Request $request){
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string',
-            'poster' => 'required|image|mimes:jpeg,png,jpg|max:2000',
+            'poster' => 'image|mimes:jpeg,png,jpg|max:2000',
             'deskripsi' => 'required|string',
             'link_video' => 'required|string',
             'biaya' => 'required|int',
@@ -35,7 +42,8 @@ class AdminController extends Controller
             $class->nama =  $request->nama;
             $class->deskripsi =  $request->deskripsi;
             $class->link_video =  $request->link_video;
-            $class->biaya=  $request->biaya;
+            $class->biaya =  $request->biaya;
+            $class->id_status =  4;
             
             if($request->hasfile('poster')){
                 $file = $request->file('poster');
@@ -108,5 +116,5 @@ class AdminController extends Controller
                 'status' => 'Success',
                 'message' => 'deleted success'
         ],200);
-    }
+    } 
 }

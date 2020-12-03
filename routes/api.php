@@ -21,14 +21,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:api']], function() { 
     Route::group(['middleware' => 'admin','prefix' => 'admin'], function() { 
         Route::get('/all-data-member', 'User\AdminController@getMember');
-        Route::get('/create-class', 'User\AdminController@createClass');
+        Route::post('/create-class', 'User\AdminController@createClass');
         Route::post('/update-class/{id}', 'User\AdminController@updateClass');
         Route::delete('/delete-class/{id}', 'User\AdminController@deleteClass');
         Route::get('/show-class', 'User\AdminController@showClass');
     });
 
     Route::group(['middleware' => ['member','active_user'],'prefix' => 'member'], function() { 
-
+        Route::get('/show-all-class', 'User\MemberController@showAllClass');
+        Route::post('/register-class', 'User\MemberController@registerClass');
+        Route::get('/show-registered-class', 'User\MemberController@showClassRegister');
+        Route::get('/show-profile', 'User\MemberController@showProfile');
+        Route::post('/update-profile/{id_member}', 'User\MemberController@updateProfile');
     });
 
 });
@@ -41,8 +45,4 @@ Route::group([ 'prefix' => 'auth'], function () {
         Route::post('logout', 'Auth\AuthController@logout');
         Route::get('user', 'Auth\AuthController@user');
     });
-});
-
-Route::get('/', function () {
-    return 'Welcome at Pottani API';
 });

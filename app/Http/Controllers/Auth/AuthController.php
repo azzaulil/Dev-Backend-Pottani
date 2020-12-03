@@ -34,10 +34,11 @@ class AuthController extends Controller
             $member = new Member;
             $member->id_users = $users->id_users;
             $member->nama_lengkap = $request->nama_lengkap;
-            $member->alamat = $request->alamat;
-            $member->jenis_kelamin = $request->jenis_kelamin;
             $member->usia = $request->usia;
+            $member->alamat = $request->alamat;
             $member->telepon = $request->telepon;
+            $member->jenis_kelamin = $request->jenis_kelamin;
+            
             if($request->hasfile('foto_profil')){
                 $file = $request->file('foto_profil');
                 $extension = $file->getClientOriginalExtension();

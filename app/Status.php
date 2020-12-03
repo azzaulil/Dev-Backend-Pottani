@@ -28,4 +28,7 @@ class Status extends Model
     public function produk(){
         return $this->hasMany(Produk::class,'id_status');
     }   
+    public function class(){
+        return $this->hasMany(Kelas::class,'id_status');
+    }  
 }
