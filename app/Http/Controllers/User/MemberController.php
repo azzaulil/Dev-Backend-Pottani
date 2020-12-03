@@ -58,7 +58,10 @@ class MemberController extends Controller
             ]);
         }else{
             $member_class->save();
-            return response()->json($member_class, 201);
+            return response()->json([
+                'status' => 'Success',
+                'data' => $member_class
+            ], 201);
         }
     }
 
