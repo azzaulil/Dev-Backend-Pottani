@@ -94,6 +94,18 @@ class MemberController extends Controller
                 }
     }
 
+    //Menampilkan detail kelas
+    public function showDetailClass($id_class)
+    {   
+        $class = Kelas::findOrFail($id_class);
+            return response()->json([
+                'status' => 'Success',
+                'data' => [
+                    'class' => $class->toArray()
+                ],
+            ],200);
+    }
+
     //menampilkan profile member
     public function showProfile()
     {
