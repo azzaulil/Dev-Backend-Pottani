@@ -18,10 +18,12 @@ class CreateClassTable extends Migration
             $table->string('nama');
             $table->string('poster')->nullable();
             $table->string('deskripsi');
+            $table->date('date_class');
             $table->string('link_video');
             $table->integer('biaya');
-            $table->bigInteger('id_status')->unsigned();
+            $table->bigInteger('id_class_category')->unsigned();
             $table->timestamps();
+
         });
     }
 
