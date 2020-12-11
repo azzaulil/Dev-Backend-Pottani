@@ -14,14 +14,16 @@ class CreateClassTable extends Migration
     public function up()
     {
         Schema::create('class', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('id_member')->unsigned();
+            $table->id('id_class');
             $table->string('nama');
-            $table->string('poster');
+            $table->string('poster')->nullable();
             $table->string('deskripsi');
+            $table->date('date_class');
             $table->string('link_video');
             $table->integer('biaya');
+            $table->bigInteger('id_class_category')->unsigned();
             $table->timestamps();
+
         });
     }
 

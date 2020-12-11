@@ -4,18 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Member extends Model
+class Kelas extends Model
 {
-    protected $table = 'member';
+    protected $table = 'class';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $primaryKey = 'id_member';
+    protected $primaryKey = 'id_class';
 
     protected $fillable = [
-        'id_users','nama_lengkap','alamat','usia','telepon','jenis_kelamin', 'foto_profil'
+        'nama','poster', 'deskripsi', 'date_class','link_video','biaya', 'id_class_category'
     ];
 
     /**
@@ -25,18 +25,10 @@ class Member extends Model
      */
     protected $hidden = [];
 
-    public function users(){
-        return $this->belongsTo(User::class,'id_users');
-    }  
-
-    public function kelas(){
-        return $this->hasMany(Kelas::class,'id_member');
+    public function class_category(){
+        return $this->belongsTo(ClassCategory::class, 'id_class_category');
     }
-    public function produk(){
-        return $this->hasMany(Produk::class,'id_member');
-    }
-
-    public function pembelian(){
-        return $this->hasMany(Pembelian::class,'id_member');
+    public function member_class(){
+        return $this->hasMany(MemberClass::class,'id_class');
     }
 }

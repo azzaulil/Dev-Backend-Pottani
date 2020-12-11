@@ -15,7 +15,7 @@ class Member extends Model
     protected $primaryKey = 'id_member';
 
     protected $fillable = [
-        'id_users','nama_lengkap','alamat','usia','telepon','jenis_kelamin'
+        'id_users','nama_lengkap','alamat','usia','telepon','jenis_kelamin', 'foto_profil'
     ];
 
     /**
@@ -27,12 +27,11 @@ class Member extends Model
 
     public function users(){
         return $this->belongsTo(User::class,'id_users');
-    }
-
-    public function kelas(){
-        return $this->hasMany(Kelas::class,'id_member');
     }  
 
+    public function member_class(){
+        return $this->hasMany(MemberClass::class,'id_member');
+    }
     public function produk(){
         return $this->hasMany(Produk::class,'id_member');
     }

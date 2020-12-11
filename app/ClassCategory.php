@@ -4,18 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class CategoryClass extends Model
 {
-    protected $table = 'status';
+    protected $table = 'class_category';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $primaryKey = 'id_status';
+    protected $primaryKey = 'id_class_category';
 
     protected $fillable = [
-        'status',
+        'class_category',
     ];
 
     /**
@@ -25,10 +25,7 @@ class Status extends Model
      */
     protected $hidden = [];
 
-    public function produk(){
-        return $this->hasMany(Produk::class,'id_status');
-    } 
-    public function member_class(){
-        return $this->hasMany(MemberClass::class,'id_status');
-    }  
+    public function class(){
+        return $this->hasMany(Kelas::class,'id_class_category');
+    }
 }

@@ -10,32 +10,50 @@ use App\User;
 use App\Member;
 use App\Kelas;
 use App\MemberClass;
+use App\ClassCategory;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
+/*/ Unauthorization/belum login /*/
 
-    //melihat kelas yang buka
+    //menampilkan semua kelas di halaman beranda
     public function showAllClass(){
-        $class = Kelas::where('id_status',4)->get();
-            if(sizeof($class) > 0){
+        $datenow = Carbon::now();
+        $class_open = Kelas::where('date_class','>=', $datenow)->get();
+        $class_close = Kelas::where('date_class','<', $datenow)->get();
+            if(sizeof($class_open) > 0){
                 return response()->json([
                     'status' => 'Success',
-                    'size' => sizeof($class),
                     'data' => [
-                        'class' => $class->toArray()
+                        'kelas yang buka' => $class_open->toArray(),
+                        'kelas yang tutup' => $class_close->toArray(),
                     ],
                 ],200);
             }else{
                 return response()->json([
                     'status' => 'Success',
-                    'size' => sizeof($class),
                     'data' => [
-                        'class' => $class->toArray()
+                        'kelas yang tutup' => $class_close->toArray()
                     ],
                 ],200);
             }
     }
+
+    //Menampilkan detail kelas yang dipilih
+    public function showDetailClass($id_class)
+    {   
+        $class = Kelas::findOrFail($id_class);
+            return response()->json([
+                'status' => 'Success',
+                'data' => [
+                    'class' => $class->toArray()
+                ],
+            ],200);
+    }
+
+/*/ Authorization/sudah login /*/    
 
     //mendaftar kelas
     public function registerClass(Request $request){
@@ -44,7 +62,7 @@ class MemberController extends Controller
 
         $member_class = new MemberClass;
         $member_class->id_member = $id;
-        $member_class->id_status = 5;
+        $member_class->id_status = 5; //terdaftar
         $member_class->id_class = $request->id_class;
         $listmember = MemberClass::where([
             ['id_class','=', $member_class->id_class],
@@ -65,28 +83,28 @@ class MemberController extends Controller
         }
     }
 
-    //menampilkan kelas yang didaftar
+    //menampilkan kelas yang didaftar member A
     public function showClassRegister(){
         $auth = Auth::user()->member;
         $id = $auth->id_member;
 
-        $member = MemberClass::where( 'id_status', '=', 5)
+        $member_class = MemberClass::where( 'id_status', '=', 5)
                    ->where( 'id_member','=', $id)
                 ->get();
-                if(sizeof($member) > 0){
+                if(sizeof($member_class) > 0){
                     return response()->json([
                         'status' => 'Success',
-                        'size' => sizeof($member),
+                        'size' => sizeof($member_class),
                         'data' => [
-                            'class' => $member->toArray()
+                            'class' => $member_class->toArray()
                         ],
                     ]);
-                }else if(sizeof($member) == 0){
+                }else if(sizeof($member_class) == 0){
                     return response()->json([
                         'status' => 'Success',
-                        'size' => sizeof($member),
+                        'size' => sizeof($member_class),
                         'data' => [
-                            'class' => $member->toArray()
+                            'member_class' => $member_class->toArray()
                         ],
                     ],200);
                 }else{
@@ -94,10 +112,17 @@ class MemberController extends Controller
                 }
     }
 
-    //Menampilkan detail kelas
-    public function showDetailClass($id_class)
+    //Menampilkan detail kelas yang didaftar member A
+    public function showDetailClassRegister($id_class)
     {   
-        $class = Kelas::findOrFail($id_class);
+        $auth = Auth::user()->member;
+        $id = $auth->id_member;
+
+        $class = Kelas::with('member_class')
+                ->whereHas('member_class', function ($query) use($id) {
+                        $query->where('id_member', '=', $id);
+                })->findOrFail($id_class);
+
             return response()->json([
                 'status' => 'Success',
                 'data' => [
