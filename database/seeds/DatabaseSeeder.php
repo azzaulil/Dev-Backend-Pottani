@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call('KomentarSeeder');
         $this->call('MemberSeeder');
         $this->call('KelasSeeder');
+        $this->call('ClassCategorySeeder');
         $this->call('JenisProdukSeeder');
         $this->call('StatusSeeder');
         $this->call('ProdukSeeder');

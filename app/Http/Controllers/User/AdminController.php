@@ -30,8 +30,10 @@ class AdminController extends Controller
             'nama' => 'required|string',
             'poster' => 'image|mimes:jpeg,png,jpg|max:2000',
             'deskripsi' => 'required|string',
+            'date_class' => 'required|date',
             'link_video' => 'required|string',
             'biaya' => 'required|int',
+            'id_class_category' => 'required|int',
         ]);
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 422);
@@ -41,9 +43,10 @@ class AdminController extends Controller
             $class = new Kelas;
             $class->nama =  $request->nama;
             $class->deskripsi =  $request->deskripsi;
+            $class->date_class =  $request->date_class;
             $class->link_video =  $request->link_video;
             $class->biaya =  $request->biaya;
-            $class->id_status =  4;
+            $class->id_class_category =  $request->id_class_category;
             
             if($request->hasfile('poster')){
                 $file = $request->file('poster');
@@ -73,16 +76,20 @@ class AdminController extends Controller
             'nama' => 'required|string',
             'poster' => 'required|image|mimes:jpeg,png,jpg|max:2000',
             'deskripsi' => 'required|string',
+            'date_class' => 'required|date',
             'link_video' => 'required|string',
             'biaya' => 'required|int',
+            'id_class_category' => 'required|int',
         ]);
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 422);
         }
         $class->nama =  $request->nama;
         $class->deskripsi =  $request->deskripsi;
+        $class->date_class =  $request->date_class;
         $class->link_video =  $request->link_video;
         $class->biaya=  $request->biaya;
+        $class->id_class_category=  $request->id_class_category;
         $class->update($request->all());
             if($request->hasfile('poster')){
                 $classPoster = public_path('uploads/kelas/'.$nama); // get previous image from folder
