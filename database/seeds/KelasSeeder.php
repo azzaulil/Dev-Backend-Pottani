@@ -13,18 +13,18 @@ class KelasSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['Kelas Hidroponik : Dari Hobi Jadi Bisnis Masa Kini','IMG-20201202-WA0000.jpg','Sebuah kelas yang menghadirkan praktisi hidroponik untuk berbagi pengetahuan dan pengalaman selama menekuni hidroponik','2020-09-19','-','0', 1],//1
-            ['Kelas Microgreens 101 : Get to Know More about Microgreens','IMG-20201202-WA0001.jpg','Sebuah kelas yang menghadirkan praktisi microgreens untuk berbagi pengetahuan dan pengalaman selama menekuni microgreens','2020-09-27','-','0', 2],//2
+            ['Kelas Hidroponik : Dari Hobi Jadi Bisnis Masa Kini','IMG-20201202-WA0000.jpg','Sebuah kelas yang menghadirkan praktisi hidroponik untuk berbagi pengetahuan dan pengalaman selama menekuni hidroponik','-','0', 1, 4],//1
+            ['Kelas Microgreens 101 : Get to Know More about Microgreens','IMG-20201202-WA0001.jpg','Sebuah kelas yang menghadirkan praktisi microgreens untuk berbagi pengetahuan dan pengalaman selama menekuni microgreens','-','0', 2, 6],//2
             ];
 
         for ($i=0; $i < count($data); $i++) {
             $nama = $data[$i][0];
             $poster = $data[$i][1];
             $deskripsi = $data[$i][2];
-            $date_class = $data[$i][3];
-            $link_video = $data[$i][4];
-            $biaya = $data[$i][5];
-            $id_class_category = $data[$i][6];
+            $link_video = $data[$i][3];
+            $biaya = $data[$i][4];
+            $id_class_category = $data[$i][5];
+            $id_status = $data[$i][6];
             $created_at = Carbon::now();
             $updated_at = Carbon::now();
 
@@ -32,10 +32,10 @@ class KelasSeeder extends Seeder
                 'nama' => $nama,
                 'poster' => $poster,
                 'deskripsi' => $deskripsi,
-                'date_class' => $date_class,
                 'link_video' => $link_video,
                 'biaya' => $biaya,
                 'id_class_category' => $id_class_category,
+                'id_status' => $id_status,
                 'created_at' => $created_at,
                 'updated_at' => $updated_at,
             ]);

@@ -15,7 +15,7 @@ class Kelas extends Model
     protected $primaryKey = 'id_class';
 
     protected $fillable = [
-        'nama','poster', 'deskripsi', 'date_class','link_video','biaya', 'id_class_category'
+        'nama','poster', 'deskripsi', 'link_video','biaya', 'id_class_category','id_status',
     ];
 
     /**
@@ -30,5 +30,8 @@ class Kelas extends Model
     }
     public function member_class(){
         return $this->hasMany(MemberClass::class,'id_class');
+    }
+    public function status(){
+        return $this->belongsTo(Status::class, 'id_status');
     }
 }

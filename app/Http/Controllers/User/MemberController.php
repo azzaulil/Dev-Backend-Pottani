@@ -64,6 +64,8 @@ class MemberController extends Controller
         $member_class->id_member = $id;
         $member_class->id_status = 5; //terdaftar
         $member_class->id_class = $request->id_class;
+        $member_class->save();
+
         $listmember = MemberClass::where([
             ['id_class','=', $member_class->id_class],
             ['id_member','=', $member_class->id_member]
@@ -72,7 +74,7 @@ class MemberController extends Controller
         if(sizeof($listmember) > 0){
             return response()->json([
                 'status' => 'Terdaftar',
-                'messages' => 'Anda sudah mendaftar kelas ini. Silahkan menunggu konfirmasi 1x24jam di email anda'
+                'messages' => 'Anda sudah mendaftar kelas ini. Silahkan menyelesaikan pembayaran untuk pendaftaran kelas ini'
             ]);
         }else{
             $member_class->save();
@@ -118,10 +120,9 @@ class MemberController extends Controller
         $auth = Auth::user()->member;
         $id = $auth->id_member;
 
-        $class = Kelas::with('member_class')
-                ->whereHas('member_class', function ($query) use($id) {
-                        $query->where('id_member', '=', $id);
-                })->findOrFail($id_class);
+        $class = Kelas::with(array('member_class' => function ($query) use($id) {
+                    $query->where('id_member', '=', $id);
+                }))->findOrFail($id_class);
 
             return response()->json([
                 'status' => 'Success',
