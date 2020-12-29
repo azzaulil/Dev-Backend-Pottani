@@ -20,9 +20,8 @@ class MemberController extends Controller
 
     //menampilkan semua kelas di halaman beranda
     public function showAllClass(){
-        $datenow = Carbon::now();
-        $class_open = Kelas::where('date_class','>=', $datenow)->get();
-        $class_close = Kelas::where('date_class','<', $datenow)->get();
+        $class_open = Kelas::where('id_status','=', 4)->get();
+        $class_close = Kelas::where('id_status','=', 6)->get();
             if(sizeof($class_open) > 0){
                 return response()->json([
                     'status' => 'Success',
