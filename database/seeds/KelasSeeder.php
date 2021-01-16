@@ -23,7 +23,7 @@ class KelasSeeder extends Seeder
             $deskripsi = $data[$i][2];
             $link_video = $data[$i][3];
             $biaya = $data[$i][4];
-            $id_class_category = $data[$i][5];
+            $id_kategori = $data[$i][5];
             $id_status = $data[$i][6];
             $created_at = Carbon::now();
             $updated_at = Carbon::now();
@@ -34,7 +34,7 @@ class KelasSeeder extends Seeder
                 'deskripsi' => $deskripsi,
                 'link_video' => $link_video,
                 'biaya' => $biaya,
-                'id_class_category' => $id_class_category,
+                'id_kategori' => $id_kategori,
                 'id_status' => $id_status,
                 'created_at' => $created_at,
                 'updated_at' => $updated_at,

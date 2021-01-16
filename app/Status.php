@@ -27,7 +27,12 @@ class Status extends Model
 
     public function produk(){
         return $this->hasMany(Produk::class,'id_status');
-    } 
+    }
+
+    public function kelas(){
+        return $this->hasMany(Kelas::class,'id_status');
+    }  
+
     public function member_class(){
         return $this->hasMany(MemberClass::class,'id_status');
     }  

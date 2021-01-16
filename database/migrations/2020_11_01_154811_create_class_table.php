@@ -20,7 +20,7 @@ class CreateClassTable extends Migration
             $table->string('deskripsi');
             $table->string('link_video');
             $table->integer('biaya');
-            $table->bigInteger('id_class_category')->unsigned();
+            $table->bigInteger('id_kategori')->unsigned();
             $table->bigInteger('id_status')->unsigned();
             $table->timestamps();
 
