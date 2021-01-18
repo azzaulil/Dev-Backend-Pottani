@@ -31,9 +31,9 @@ class MemberController extends Controller
             }else{
                 return response()->json([
                     'status' => 'Success',
-                    'messages' => 'Belum ada kelas yang buka dalam waktu dekat'
+                    'messages' => 'Belum ada kelas yang buka dalam waktu dekat',
                     ],
-                ],200);
+                );200;
             }
     }
     
