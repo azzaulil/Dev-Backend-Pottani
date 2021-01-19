@@ -20,7 +20,14 @@ class MemberController extends Controller
 
     //menampilkan semua kelas yang aktif 
     public function AllClass(){
-        $class = Kelas::where('id_status','=', 4)->get();
+        $auth = Auth::user()->member;
+        $id = $auth->id_member;
+
+        $class = Kelas::with(array('member_class' => function ($query) use($id) {
+                    $query->where('id_member', '=', $id);
+                }))->where('id_status','=', 4)->get();
+
+        // $class = Kelas::with('member_class')->where('id_status','=', 4)->get();
             if(sizeof($class) > 0){
                 return response()->json([
                     'status' => 'Success',
@@ -31,9 +38,8 @@ class MemberController extends Controller
             }else{
                 return response()->json([
                     'status' => 'Success',
-                    'messages' => 'Belum ada kelas yang buka dalam waktu dekat',
-                    ],
-                );200;
+                    'messages' => 'Belum ada kelas yang buka dalam waktu dekat'
+                ],200);
             }
     }
     
