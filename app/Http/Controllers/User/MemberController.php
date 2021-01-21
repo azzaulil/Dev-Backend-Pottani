@@ -25,7 +25,7 @@ class MemberController extends Controller
 
         $class = Kelas::with(array('member_class' => function ($query) use($id) {
                     $query->where('id_member', '=', $id);
-                }))->where('id_status','=', 4)->get();
+                }))->get();
 
         // $class = Kelas::with('member_class')->where('id_status','=', 4)->get();
             if(sizeof($class) > 0){
