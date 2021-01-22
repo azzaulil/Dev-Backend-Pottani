@@ -23,16 +23,21 @@ class MemberController extends Controller
         $auth = Auth::user()->member;
         $id = $auth->id_member;
 
-        $class = Kelas::with(array('member_class' => function ($query) use($id) {
+        $class_open = Kelas::with(array('member_class' => function ($query) use($id) {
                     $query->where('id_member', '=', $id);
-                }))->get();
+                }))->where('id_status','=', 4)->get();
+
+        $class_close = Kelas::with(array('member_class' => function ($query) use($id) {
+                    $query->where('id_member', '=', $id);
+                }))->where('id_status','=', 6)->get();
 
         // $class = Kelas::with('member_class')->where('id_status','=', 4)->get();
-            if(sizeof($class) > 0){
+            if(sizeof($class_open) > 0){
                 return response()->json([
                     'status' => 'Success',
                     'data' => [
-                        'kelas aktif' => $class->toArray(),
+                        'kelas yang buka' => $class_open->toArray(),
+                        'kelas yang tutup' => $class_close->toArray(),
                     ],
                 ],200);
             }else{
