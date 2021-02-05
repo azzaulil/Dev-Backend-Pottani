@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth:api']], function() {
 });
 
 Route::group([ 'prefix' => 'auth'], function () {
+    Route::get('user/verify/{token}', 'Auth\AuthController@verifyUser')->name('verify');
     Route::post('login', 'Auth\AuthController@login');
     Route::post('register', 'Auth\AuthController@register');
     Route::get('show-all-class', 'User\UserController@showAllClass');

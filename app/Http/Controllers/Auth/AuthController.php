@@ -8,10 +8,14 @@ use Auth;
 use Carbon\Carbon;
 use App\User;
 use App\Member;
+use App\Mail\VerifyMail;
 use DB;
 
 class AuthController extends Controller
 {
+
+    // protected $redirectTo = '/email/verify';
+    
     public function register(Request $request)
     {
         $request->validate([
@@ -24,6 +28,7 @@ class AuthController extends Controller
             $users->email = $request->email;
             $users->password = bcrypt($request->password);
             $users->id_role=2;
+            $users->verified_token = sha1(time());
             $users->save();
             
         }catch(\Exception $e){
@@ -52,10 +57,36 @@ class AuthController extends Controller
             return response()->json(['status' => 'Register Member Failed', 'message' => $e->getMessage()]);
         }
         DB::commit();
+
+        \Mail::to($users->email)->send(new VerifyMail($users));
         
         return response()->json([
             'status' => 'Created',
             'message' => 'Successfully registered as Member!'
+        ], 201);
+    }
+
+    public function verifyUser($token)
+    {
+      $verifyUser = User::where('verified_token', $token)->first();
+      if(isset($verifyUser) ){
+        $user = $verifyUser;
+        if(!$user->is_active) {
+          $verifyUser->is_active = 1;
+          $verifyUser->save();
+          $status = "Your e-mail is verified. You can now login.";
+        } else {
+          $status = "Your e-mail is already verified. You can now login.";
+        }
+      } else {
+        return response()->json([
+            'status' => 'Error',
+            'message' => 'Sorry your email cannot be identified.'
+        ], 200);
+      }
+      return response()->json([
+            'status' => $status,
+            'message' => $status
         ], 201);
     }
     /**
