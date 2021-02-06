@@ -13,8 +13,8 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $data = [
-            [1,1, 'admin@gmail.com', bcrypt('12345678')],//1
-            [2,1, 'member@gmail.com', bcrypt('12345678')],//2
+            [1,1, 'admin@gmail.com', bcrypt('12345678'),'-'],//1
+            [2,1, 'member@gmail.com', bcrypt('12345678'),'-'],//2
         ];
 
         for ($i=0; $i < count($data); $i++) {
@@ -22,6 +22,7 @@ class UsersSeeder extends Seeder
             $is_active = $data[$i][1];
             $email = $data[$i][2];
             $password = $data[$i][3];
+            $verified_token = $data[$i][4];
             $created_at = Carbon::now();
             $updated_at = Carbon::now();
 
@@ -30,6 +31,7 @@ class UsersSeeder extends Seeder
                 'is_active' => $is_active, 
                 'email' => $email, 
                 'password' => $password, 
+                'verified_token' => $verified_token,
                 'created_at' => $created_at,
                 'updated_at' => $updated_at,
             ]);
